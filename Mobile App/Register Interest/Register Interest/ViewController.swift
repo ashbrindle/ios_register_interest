@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import CoreData
+import Network
 
 class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
@@ -109,7 +110,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         self.lat = locValue.latitude
         self.long = locValue.longitude
-        print("location = \(locValue.latitude) \(locValue.longitude)")
     }
     
     struct SubjectArea: Decodable { var name: String }
@@ -163,24 +163,29 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
             txt_email.text = ""
             self.subjectareapicker.selectRow(0, inComponent: 0, animated: true)
             
-            self.txt_subject.text = subject_areas[0].name
+            if subject_areas.count > 0 {
+                self.txt_subject.text = subject_areas[0].name
+            }
+            else {
+                self.txt_subject.text = ""
+            }
             
             self.datepicker.setDate(Date(), animated: true)
             setDefaultDate()
             self.switch_marketing.setOn(true, animated: true)
             
-            let alert = UIAlertController(title: "Well Done", message: "Submission Complete, Thank you for Registering Your Interest", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Finish", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            
+            createAlert(title: "Well Done", message: "Submission Sent Sucessfully, Thank you for Registering Your Interest", action_title: "Finish")
         }
         else {
-            let alert = UIAlertController(title: "Invalid", message: "One or More of Your Entries is Invalid", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Try Again", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            createAlert(title: "Invalid", message: "One or More of Your Entries is Invalid", action_title: "Try Again")
         }
     }
     
+    func createAlert(title: String, message: String, action_title: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: action_title, style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func checkEmail() -> Bool {
         let regularExpressionForEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -195,7 +200,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
         let components = calendar.dateComponents([.year, .month, .day], from: birthDate, to: today)
         let ageYears = components.year
         let user_age = "\(ageYears!)"
-        print(user_age)
         
         if (Int(user_age)! < 16) {
             return false
@@ -207,36 +211,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
           if segue.identifier == "AdminButtonSegue" {
-              if let nextViewController = segue.destination as? AdminViewController {
-                if (txt_password.text == "password") {
-                    nextViewController.data_set = getAllSubjects()
-                }
-                else {
-                    let alert = UIAlertController(title: "Incorrect Password", message: "Password entered was incorrect", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Try Again", style: UIAlertAction.Style.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+            if segue.destination is AdminViewController {
+                if (txt_password.text != "password") {
+                    createAlert(title: "Incorrect Password", message: "Password entered was incorrect", action_title: "Try Again")
                 }
               }
           }
-    }
-    
-    func getAllSubjects() -> [Subject] {
-        var subjects = [Subject]()
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Subject")
-        request.returnsObjectsAsFaults = false
-        let context = appDelegate.persistentContainer.viewContext
-        
-        do {
-            let result = try context.fetch(request)
-            
-            for data in result as! [NSManagedObject] {
-                let subject = Subject.init(name: data.value(forKey: "name") as! String, email: data.value(forKey: "email") as! String, dob: data.value(forKey: "dob") as! String, subject: data.value(forKey: "subjectarea") as! String, market: data.value(forKey: "marketingupdates") as! Bool, gpslat: data.value(forKey: "gpslat") as! Double, gpslon: data.value(forKey: "gpslon") as! Double)
-                subjects.append(subject)
-            }
-        } catch {
-            print("query failed")
-        }
-        return subjects
     }
 }
 
