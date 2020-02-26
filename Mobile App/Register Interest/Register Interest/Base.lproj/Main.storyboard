@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,27 +11,27 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Register_Interest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2h9-Xa-VpJ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Tt-hm-Xnf">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="958"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="958"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGo-rS-Snd">
-                                                <rect key="frame" x="0.0" y="10" width="320" height="100"/>
+                                                <rect key="frame" x="0.0" y="10" width="600" height="100"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_logo" translatesAutoresizingMaskIntoConstraints="NO" id="pLf-4g-hka">
-                                                        <rect key="frame" x="220" y="0.0" width="100" height="100"/>
+                                                        <rect key="frame" x="500" y="0.0" width="100" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="985-y5-j2M"/>
                                                             <constraint firstAttribute="height" constant="100" id="dFu-ro-hnU"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register Your Interest with University of South Wales" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hGA-CW-ucb">
-                                                        <rect key="frame" x="0.0" y="0.0" width="220" height="100"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="500" height="100"/>
                                                         <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="highlightedColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -54,10 +53,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c0d-4M-OhA">
-                                                <rect key="frame" x="5" y="120" width="310" height="34"/>
+                                                <rect key="frame" x="5" y="120" width="590" height="34"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vql-r9-dKa">
-                                                        <rect key="frame" x="34" y="0.0" width="266" height="34"/>
+                                                        <rect key="frame" x="34" y="0.0" width="546" height="34"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -85,16 +84,16 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WB3-EN-Ztz">
-                                                <rect key="frame" x="5" y="859" width="310" height="40"/>
+                                                <rect key="frame" x="5" y="859" width="590" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Admin Settings Access Below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1j-Nb-ku0">
-                                                        <rect key="frame" x="0.0" y="0.0" width="270" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="550" height="40"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tray.and.arrow.up.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="vcu-tE-8Xv">
-                                                        <rect key="frame" x="270" y="-1.5" width="40" height="41.5"/>
+                                                        <rect key="frame" x="550" y="-1.5" width="40" height="41.5"/>
                                                         <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="6nc-Xd-Ifw"/>
@@ -116,10 +115,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dH6-x3-exn">
-                                                <rect key="frame" x="5" y="164" width="310" height="34"/>
+                                                <rect key="frame" x="5" y="164" width="590" height="34"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z2b-m2-52x">
-                                                        <rect key="frame" x="34" y="0.0" width="266" height="34"/>
+                                                        <rect key="frame" x="34" y="0.0" width="546" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" textContentType="email"/>
                                                     </textField>
@@ -145,10 +144,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qxw-Lw-1Qb">
-                                                <rect key="frame" x="5" y="208" width="310" height="34"/>
+                                                <rect key="frame" x="5" y="208" width="590" height="34"/>
                                                 <subviews>
                                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Your Date of Birth Below" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="za4-bH-CTG">
-                                                        <rect key="frame" x="34" y="0.0" width="266" height="34"/>
+                                                        <rect key="frame" x="34" y="0.0" width="546" height="34"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -179,10 +178,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05a-ma-BjG">
-                                                <rect key="frame" x="5" y="478" width="310" height="34"/>
+                                                <rect key="frame" x="5" y="478" width="590" height="34"/>
                                                 <subviews>
                                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Your Subject Interest Below" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z5v-1Q-yGc">
-                                                        <rect key="frame" x="34" y="0.0" width="266" height="34"/>
+                                                        <rect key="frame" x="34" y="0.0" width="546" height="34"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -213,16 +212,16 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uf8-Na-DX0">
-                                                <rect key="frame" x="5" y="748" width="310" height="31"/>
+                                                <rect key="frame" x="5" y="748" width="590" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recieve Marketing Updates?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qww-KY-NGT">
-                                                        <rect key="frame" x="10" y="0.0" width="241" height="31"/>
+                                                        <rect key="frame" x="10" y="0.0" width="521" height="31"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6cz-WZ-Iao">
-                                                        <rect key="frame" x="251" y="0.0" width="51" height="31"/>
+                                                        <rect key="frame" x="531" y="0.0" width="51" height="31"/>
                                                     </switch>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.54082739349999998" green="0.0" blue="0.15292203430000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -239,10 +238,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMw-bb-FXO">
-                                                <rect key="frame" x="5" y="789" width="310" height="30"/>
+                                                <rect key="frame" x="5" y="789" width="590" height="30"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tta-sG-lOa">
-                                                        <rect key="frame" x="10" y="0.0" width="290" height="30"/>
+                                                        <rect key="frame" x="10" y="0.0" width="570" height="30"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                         <state key="normal" title="Submit">
                                                             <color key="titleColor" red="0.18789657360000001" green="0.044661117350000001" blue="0.075365865840000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -265,10 +264,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScP-I3-gYv">
-                                                <rect key="frame" x="5" y="252" width="310" height="216"/>
+                                                <rect key="frame" x="5" y="252" width="590" height="216"/>
                                                 <subviews>
                                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="MdG-e3-FF9">
-                                                        <rect key="frame" x="40" y="0.0" width="230" height="216"/>
+                                                        <rect key="frame" x="40" y="0.0" width="510" height="216"/>
                                                         <color key="backgroundColor" red="0.54082739349999998" green="0.0" blue="0.15292203430000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="highlightsToday" value="NO"/>
@@ -291,10 +290,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fk-sY-Var">
-                                                <rect key="frame" x="5" y="522" width="310" height="216"/>
+                                                <rect key="frame" x="5" y="522" width="590" height="216"/>
                                                 <subviews>
                                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8d0-AW-Tn0">
-                                                        <rect key="frame" x="40" y="0.0" width="230" height="216"/>
+                                                        <rect key="frame" x="40" y="0.0" width="510" height="216"/>
                                                         <color key="backgroundColor" red="0.54082739349999998" green="0.0" blue="0.15292203430000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -314,10 +313,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22k-sR-4oY">
-                                                <rect key="frame" x="5" y="904" width="310" height="34"/>
+                                                <rect key="frame" x="5" y="904" width="590" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="heX-vc-S7E">
-                                                        <rect key="frame" x="205" y="0.0" width="100" height="34"/>
+                                                        <rect key="frame" x="485" y="0.0" width="100" height="34"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="XiV-K5-EV6"/>
@@ -333,7 +332,7 @@
                                                         </connections>
                                                     </button>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mBd-fN-vFN">
-                                                        <rect key="frame" x="5" y="0.0" width="195" height="34"/>
+                                                        <rect key="frame" x="5" y="0.0" width="475" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                     </textField>
@@ -419,7 +418,7 @@
                         <outlet property="txt_email" destination="Z2b-m2-52x" id="FIj-Re-KKQ"/>
                         <outlet property="txt_name" destination="Vql-r9-dKa" id="hcg-Di-vV3"/>
                         <outlet property="txt_password" destination="mBd-fN-vFN" id="ohq-gm-iCY"/>
-                        <outlet property="txt_subject" destination="Z5v-1Q-yGc" id="sjz-BN-P0Q"/>
+                        <outlet property="txt_subject_areas" destination="Z5v-1Q-yGc" id="sjz-BN-P0Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -431,18 +430,18 @@
             <objects>
                 <viewController id="Ybo-ym-XY7" customClass="AdminViewController" customModule="Register_Interest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hti-o8-riP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pZn-Dj-nf8">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="503"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="535"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="custom_cell" id="SRl-J7-qkW" customClass="TableViewCellAdapter" customModule="Register_Interest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SRl-J7-qkW" id="i6A-Fx-zzd">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTn-Kk-ALG">
@@ -481,10 +480,10 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xgd-QQ-s4O">
-                                <rect key="frame" x="5" y="503" width="310" height="40"/>
+                                <rect key="frame" x="5" y="535" width="590" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6H6-aY-CvD">
-                                        <rect key="frame" x="20" y="5" width="132.5" height="30"/>
+                                        <rect key="frame" x="20" y="5" width="272.5" height="30"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <state key="normal" title="Publish">
                                             <color key="titleColor" red="0.1881645918" green="0.042947925630000001" blue="0.074506722390000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -497,7 +496,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AoY-Rt-vQU">
-                                        <rect key="frame" x="157.5" y="5" width="132.5" height="30"/>
+                                        <rect key="frame" x="297.5" y="5" width="272.5" height="30"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <state key="normal" title="Back">
                                             <color key="titleColor" red="0.1881645918" green="0.042947925630000001" blue="0.074506722390000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

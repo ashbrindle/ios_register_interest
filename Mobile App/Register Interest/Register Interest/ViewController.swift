@@ -27,7 +27,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        txt_subject.text = subject_areas[row].name
+        txt_subject_areas.text = subject_areas[row].name
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -45,12 +45,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
     @IBOutlet weak var txt_DOB: UITextField!
     @IBOutlet weak var txt_name: UITextField!
     @IBOutlet weak var txt_email: UITextField!
-    @IBOutlet weak var txt_subject: UITextField!
+    @IBOutlet weak var txt_subject_areas: UITextField!
     @IBOutlet weak var switch_marketing: UISwitch!
     @IBOutlet weak var subjectareapicker: UIPickerView!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var subjects : Array<Subject> = Array()
     var subject_areas : Array<SubjectArea> = Array()
     let locationManager = CLLocationManager()
     var long: Double?
@@ -68,30 +67,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
         
     }
     
-    func insertData(name: String, email: String, dob: String, subject: String, market: Bool, gpslat: Double, gpslon: Double) {
-        let context = appDelegate.persistentContainer.viewContext
-        
-        context.perform {
-            let entity = NSEntityDescription.entity(forEntityName: "Subject", in: context)
-            let newSubject = NSManagedObject(entity: entity!, insertInto: context)
-            
-            newSubject.setValue(name, forKey: "name")
-            newSubject.setValue(email, forKey: "email")
-            newSubject.setValue(dob, forKey: "dob")
-            newSubject.setValue(subject, forKey: "subjectarea")
-            newSubject.setValue(market, forKey: "marketingupdates")
-            newSubject.setValue(gpslat, forKey: "gpslat")
-            newSubject.setValue(gpslon, forKey: "gpslon")
-            
-            do {
-                try context.save()
-            } catch {
-                print("Failed to Save")
-            }
-            
-        }
-    }
-    
     func setupLocation() {
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
@@ -100,6 +75,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+    }
+    
+    func setDefaultDate() {
+        datepicker.datePickerMode = UIDatePicker.Mode.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        let selectedDate = dateFormatter.string(from: datepicker.date)
+        txt_DOB.text = selectedDate
     }
     
     override func didReceiveMemoryWarning() {
@@ -127,21 +110,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
                 DispatchQueue.main.async {
                     self.subjectareapicker.delegate = self
                     self.subjectareapicker.dataSource = self
-                    self.txt_subject.text = self.subject_areas[0].name
+                    self.txt_subject_areas.text = self.subject_areas[0].name
                 }
             } catch let jsonErr {
                 print(jsonErr)
             }
         }.resume()
-        
-    }
-    
-    func setDefaultDate() {
-        datepicker.datePickerMode = UIDatePicker.Mode.date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM yyyy"
-        let selectedDate = dateFormatter.string(from: datepicker.date)
-        txt_DOB.text = selectedDate
     }
     
     @IBAction func date_picker_changed(_ sender: UIDatePicker) {
@@ -155,19 +129,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
     
     
     @IBAction func btnSubmit(_ sender: UIButton) {
-        if (checkDate() && checkEmail() && !(txt_name.text == "") && !(txt_email.text == "")) {
+        let validation = Validation()
+        if (validation.checkDate(datepicker: self.datepicker) && validation.checkEmail(txt_email: self.txt_email) && !(txt_name.text == "") && !(txt_email.text == "")) {
             
-            insertData(name: txt_name.text ?? "", email: txt_email.text ?? "", dob: txt_DOB.text ?? "", subject: txt_subject.text ?? "", market: switch_marketing.isOn, gpslat: self.lat ?? 0.0, gpslon: self.long ?? 0.0)
+            ManageData().insertData(name: txt_name.text ?? "", email: txt_email.text ?? "", dob: txt_DOB.text ?? "", subject: txt_subject_areas.text ?? "", market: switch_marketing.isOn, gpslat: self.lat ?? 0.0, gpslon: self.long ?? 0.0)
             
             txt_name.text = ""
             txt_email.text = ""
             self.subjectareapicker.selectRow(0, inComponent: 0, animated: true)
             
             if subject_areas.count > 0 {
-                self.txt_subject.text = subject_areas[0].name
+                self.txt_subject_areas.text = subject_areas[0].name
             }
             else {
-                self.txt_subject.text = ""
+                self.txt_subject_areas.text = ""
             }
             
             self.datepicker.setDate(Date(), animated: true)
@@ -187,27 +162,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
         self.present(alert, animated: true, completion: nil)
     }
     
-    func checkEmail() -> Bool {
-        let regularExpressionForEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let testEmail = NSPredicate(format:"SELF MATCHES %@", regularExpressionForEmail)
-        return testEmail.evaluate(with: txt_email.text)
-    }
-    
-    func checkDate() -> Bool {
-        let birthDate = self.datepicker.date
-        let today = Date()
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: birthDate, to: today)
-        let ageYears = components.year
-        let user_age = "\(ageYears!)"
-        
-        if (Int(user_age)! < 16) {
-            return false
-        }
-        else {
-            return true
-        }
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
           if segue.identifier == "AdminButtonSegue" {
@@ -217,25 +171,5 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
                 }
               }
           }
-    }
-}
-
-class Subject : Encodable {
-    var Name: String = ""
-    var Email: String = ""
-    var DOB: String = ""
-    var SubjectArea: String = ""
-    var MarketingUpdates: Bool = false
-    var GpsLat: Double = 0.0
-    var GpsLon: Double = 0.0
-    
-    init(name: String, email: String, dob: String, subject: String, market: Bool, gpslat: Double, gpslon: Double) {
-        Name = name
-        Email = email
-        DOB = dob
-        SubjectArea = subject
-        MarketingUpdates = market
-        GpsLat = gpslat
-        GpsLon = gpslon
     }
 }
