@@ -45,7 +45,7 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
     /* Determines the size of the table */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // size being the amount of subjects to be displayed
-        return ManageData().getAllSubjects().count
+        return ManageData().getSubjects().count
     }
     
     /* Runs when a cell is selected */
@@ -55,89 +55,123 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // creates a message to display when a subject is selected
         var message: String = ""
-        message = message + "Name: \n" + data.getAllSubjects()[indexPath.row].Name
-        message = message + "\n\nEmail: \n" + data.getAllSubjects()[indexPath.row].Email
-        message = message + "\n\nDOB: \n" + data.getAllSubjects()[indexPath.row].DOB
-        message = message + "\n\nSubject: \n" + data.getAllSubjects()[indexPath.row].SubjectArea
-        message = message + "\n\nMarketing Updates: \n" + String(data.getAllSubjects()[indexPath.row].MarketingUpdates)
-        message = message + "\n\nLocation: \n" + String(data.getAllSubjects()[indexPath.row].GpsLat)
-        message = message + " " + String(data.getAllSubjects()[indexPath.row].GpsLon)
+        message = message + "Name: \n" + data.getSubjects()[indexPath.row].Name
+        message = message + "\n\nEmail: \n" + data.getSubjects()[indexPath.row].Email
+        message = message + "\n\nDOB: \n" + data.getSubjects()[indexPath.row].DOB
+        message = message + "\n\nSubject: \n" + data.getSubjects()[indexPath.row].SubjectArea
+        message = message + "\n\nMarketing Updates: \n" + String(data.getSubjects()[indexPath.row].MarketingUpdates)
+        message = message + "\n\nLocation: \n" + String(data.getSubjects()[indexPath.row].GpsLat)
+        message = message + " " + String(data.getSubjects()[indexPath.row].GpsLon)
         
         // produces an alert to display all data about the selected subject
         createAlert(title: "Subject", message: message, action_title: "Dismiss")
     }
-    
+
+    /* Called when assigning details to each cell */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = ManageData()
+        // gets the cell with the identifier "custom_cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: "custom_cell", for: indexPath) as! TableViewCellAdapter
-        cell.txtName?.text = data.getAllSubjects()[indexPath.item].Name
-        cell.txt_Subject?.text = data.getAllSubjects()[indexPath.item].SubjectArea
+        // populates the cell with the relevant data
+        cell.txtName?.text = data.getSubjects()[indexPath.item].Name
+        cell.txt_Subject?.text = data.getSubjects()[indexPath.item].SubjectArea
         return cell
     }
-    
+
+    /* Called when the back button is pressed on the admin view */
     @IBAction func btnBack(_ sender: UIButton) {
+    	// dismiss' the window and shows the form again
         dismiss(animated: true, completion: nil)
     }
     
+    /* Method created to create and show an alert with the specified parameters */
     func createAlert(title: String, message: String, action_title: String) {
+    	// creates the alert as an async task, so it will run on the GUI thread
         DispatchQueue.main.async {
+        	// create alert with specified message
             let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+            // adds an action to the alert, e.g an "ok" button
             alert.addAction(UIAlertAction(title: action_title, style: UIAlertAction.Style.default, handler: nil))
+            // shows the alert
             self.present(alert, animated: true, completion: nil)
         }
     }
 
+    /* Class created to allow the return message
+    from the server when the upload is successful */
     class Message : Decodable {
         var message : String = ""
     }
     
-    @IBAction func btnPublish(_ sender: Any) {
-        let device_data = ManageData()
-        if device_data.getAllSubjects().count > 0 {
-            guard let url = URL(string: "https://prod-69.westeurope.logic.azure.com:443/workflows/d2ec580e6805459893e498d43f292462/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=zn8yq-Xe3cOCDoRWTiLwDsUDXAwdGSNzxKL5OUHJPxo") else {
-                print("Bad URL")
-                return
-                
-            }
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
+    /* Called when an individual subject is being uploaded */
+    func uploadSubject(subject: Subject) {
+        // creates the URL for the upload (guard let used incase the url is invalid)
+        guard let url = URL(string: "https://prod-69.westeurope.logic.azure.com:443/workflows/d2ec580e6805459893e498d43f292462/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=zn8yq-Xe3cOCDoRWTiLwDsUDXAwdGSNzxKL5OUHJPxo") else {
+            print("Bad URL")
+            return
             
-            do {
-                var json_send = Data()
-                let subjs = ManageData().getAllSubjects()
-                for subject in subjs {
-                    let json = try JSONEncoder().encode(subject)
-                    json_send = json_send + json
+        }
+
+        // sets the request method for the url, "POST" to post the data
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        do {
+            // this will then encode the subject (passed into this method)
+            var json_send = Data()
+            json_send = try JSONEncoder().encode(subject)
+            
+            // specifies the content type that will be uploaded
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            // uploads the subject to the server
+            request.httpBody = json_send
+            print("Uploading Data")
+            
+            // next the data will be retrieved from the server to get a confirmation message
+            URLSession.shared.dataTask(with: request) {
+                (data, response, error) in
+
+                // assigns the data to a variable
+                guard let data = data else { return }
+                do {
+                    // decodes the recieved JSON data into a message object
+                    let message = try JSONDecoder().decode(Message.self, from: data)
+                    // prints the return message to state if the upload was successful or unsuccessful
+                    print(message.message)
                 }
-                
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.httpBody = json_send
-                print("Uploading Data")
-                
-                URLSession.shared.dataTask(with: request) {
-                    (data, response, error) in
-                    guard let data = data else { return }
-                    do {
-                        let message = try JSONDecoder().decode(Message.self, from: data)
-                        
-                        DispatchQueue.main.async {
-                            device_data.emptyData()
-                            self.tableview.reloadData()
-                            if message.message != "" {
-                                self.createAlert(title: "Upload Successful", message: message.message, action_title: "Dismiss")
-                            }
-                        }
-                    } catch let jsonErr {
-                        print(jsonErr)
-                        self.createAlert(title: "Upload Unsuccessful", message: "Please Try Again", action_title: "Dismiss")
-                    }
-                }.resume()
-                
-                
-            } catch let jsonErr {
-                print(jsonErr)
-                self.createAlert(title: "Upload Unsuccessful", message: "Please Try Again", action_title: "Dismiss")
+                catch let jsonErr {
+                    print(jsonErr.localizedDescription)
+                }
+            }.resume()
+            
+            
+        }
+        catch let jsonErr {
+            print(jsonErr.localizedDescription)
+        }
+    }
+
+    /* Called when the publish button is pressed */
+    @IBAction func btnPublish(_ sender: Any) {
+        // grabs the data saved on the device
+        let device_data = ManageData()
+        // checks if there are any subjects saved on the device
+        if device_data.getSubjects().count > 0 {
+            
+            // saves the subjects to an array
+            let subjs = ManageData().getSubjects()
+            // this is then used to loop through each subject and upload them individually to the server
+            for subject in subjs {
+                uploadSubject(subject: subject)
             }
+            
+            // once the upload of all the data is complete, the device will clear all of the data saved
+            device_data.clearAllSubjects()
+            // the tableview will now reload its data and display no subjects to upload
+            self.tableview.reloadData()
+            // an alert will then appear and state that the upload was successful
+            createAlert(title: "Upload Complete", message: "Upload was Successful", action_title: "Dismiss")
+            
             
         }
         

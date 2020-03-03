@@ -9,6 +9,8 @@
 import Foundation
 
 class Subject : Encodable {
+    
+    /* --- SUBJECT ATTRIBUTES --- */
     var Name: String = ""
     var Email: String = ""
     var DOB: String = ""
@@ -17,7 +19,9 @@ class Subject : Encodable {
     var GpsLat: Double = 0.0
     var GpsLon: Double = 0.0
     
+    /* Constructor called when the subject is created */
     init(name: String, email: String, dob: String, subject: String, market: Bool, gpslat: Double, gpslon: Double) {
+        // all of the relevant details on the subject are then saved into the object
         Name = name
         Email = email
         DOB = dob
