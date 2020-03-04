@@ -28,6 +28,9 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     /* --- UI ATTRIBUTES --- */
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var lblLoading: UILabel!
+    var data_size: Int = 0
+    var data_count: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,7 +107,7 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     /* Called when an individual subject is being uploaded */
-    func uploadSubject(subject: Subject) {
+    func uploadSubject(subject: Subject, device_data: ManageData) {
         // creates the URL for the upload (guard let used incase the url is invalid)
         guard let url = URL(string: "https://prod-69.westeurope.logic.azure.com:443/workflows/d2ec580e6805459893e498d43f292462/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=zn8yq-Xe3cOCDoRWTiLwDsUDXAwdGSNzxKL5OUHJPxo") else {
             print("Bad URL")
@@ -138,6 +141,18 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
                     let message = try JSONDecoder().decode(Message.self, from: data)
                     // prints the return message to state if the upload was successful or unsuccessful
                     print(message.message)
+                    DispatchQueue.main.async {
+                        self.data_count += 1
+                        if (self.data_count == self.data_size) {
+                            // an alert will then appear and state that the upload was successful
+                            self.createAlert(title: "Upload Complete", message: "Upload was Successful", action_title: "Dismiss")
+                            // once the upload of all the data is complete, the device will clear all of the data saved
+                            device_data.clearAllSubjects()
+                            // the tableview will now reload its data and display no subjects to upload
+                            self.tableview.reloadData()
+                            self.lblLoading.text = "Data Upload Complete"
+                        }
+                    }
                 }
                 catch let jsonErr {
                     print(jsonErr.localizedDescription)
@@ -155,24 +170,18 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBAction func btnPublish(_ sender: Any) {
         // grabs the data saved on the device
         let device_data = ManageData()
+        data_size = device_data.getSubjects().count
         // checks if there are any subjects saved on the device
         if device_data.getSubjects().count > 0 {
             
             // saves the subjects to an array
             let subjs = ManageData().getSubjects()
+            self.lblLoading.text = "Uploading Data..."
             // this is then used to loop through each subject and upload them individually to the server
             for subject in subjs {
-                uploadSubject(subject: subject)
+                uploadSubject(subject: subject, device_data: device_data)
             }
-            
-            // once the upload of all the data is complete, the device will clear all of the data saved
-            device_data.clearAllSubjects()
-            // the tableview will now reload its data and display no subjects to upload
-            self.tableview.reloadData()
-            // an alert will then appear and state that the upload was successful
-            createAlert(title: "Upload Complete", message: "Upload was Successful", action_title: "Dismiss")
-            
-            
+
         }
         
     }

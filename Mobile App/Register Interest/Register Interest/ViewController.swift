@@ -80,6 +80,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
         setDefaultDate()
         setupLocation()
         
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        
     }
     
     /* Method run when the view loads above */
