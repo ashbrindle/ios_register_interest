@@ -178,7 +178,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewD
         let validation = Validation()
         
         // a check is then made if all of the fields have the required data for a registration
-        if (validation.checkDate(datepicker: self.datepicker) && validation.checkEmail(txt_email: self.txt_email) && !(txt_name.text == "") && !(txt_email.text == "")) {
+        if (validation.checkDate(date: self.datepicker.date) && validation.checkEmail(txt_email: self.txt_email.text ?? "") && !(txt_name.text == "") && !(txt_email.text == "")) {
             
             // the data is then saved to the device using the method created in the "ManageData.swift" file
             ManageData().saveSubject(name: txt_name.text ?? "", email: txt_email.text ?? "", dob: txt_DOB.text ?? "", subject: txt_subject_areas.text ?? "", market: switch_marketing.isOn, gpslat: self.lat ?? 0.0, gpslon: self.long ?? 0.0)
