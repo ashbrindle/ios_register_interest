@@ -14,7 +14,7 @@
 		032B123923F6002E001BA5E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 032B123823F6002E001BA5E0 /* Assets.xcassets */; };
 		032B123C23F6002E001BA5E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 032B123A23F6002E001BA5E0 /* LaunchScreen.storyboard */; };
 		032B124723F6002E001BA5E0 /* Register_InterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B124623F6002E001BA5E0 /* Register_InterestTests.swift */; };
-		032B125223F6002E001BA5E0 /* Register_InterestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B125123F6002E001BA5E0 /* Register_InterestUITests.swift */; };
+		2CBF9B242420110A004A311A /* Register_InterestUserInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF9B232420110A004A311A /* Register_InterestUserInterfaceTests.swift */; };
 		9C109B2A2406C7E700CDAD73 /* ManageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C109B292406C7E700CDAD73 /* ManageData.swift */; };
 		9C109B2D2406CCE500CDAD73 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C109B2C2406CCE500CDAD73 /* Validation.swift */; };
 		9C109B2F2406CF5100CDAD73 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C109B2E2406CF5100CDAD73 /* Student.swift */; };
@@ -54,8 +54,8 @@
 		032B124623F6002E001BA5E0 /* Register_InterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register_InterestTests.swift; sourceTree = "<group>"; };
 		032B124823F6002E001BA5E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		032B124D23F6002E001BA5E0 /* Register InterestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Register InterestUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		032B125123F6002E001BA5E0 /* Register_InterestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register_InterestUITests.swift; sourceTree = "<group>"; };
 		032B125323F6002E001BA5E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CBF9B232420110A004A311A /* Register_InterestUserInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register_InterestUserInterfaceTests.swift; sourceTree = "<group>"; };
 		9C109B292406C7E700CDAD73 /* ManageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageData.swift; sourceTree = "<group>"; };
 		9C109B2C2406CCE500CDAD73 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		9C109B2E2406CF5100CDAD73 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
@@ -142,8 +142,8 @@
 		032B125023F6002E001BA5E0 /* Register InterestUITests */ = {
 			isa = PBXGroup;
 			children = (
-				032B125123F6002E001BA5E0 /* Register_InterestUITests.swift */,
 				032B125323F6002E001BA5E0 /* Info.plist */,
+				2CBF9B232420110A004A311A /* Register_InterestUserInterfaceTests.swift */,
 			);
 			path = "Register InterestUITests";
 			sourceTree = "<group>";
@@ -321,7 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				032B125223F6002E001BA5E0 /* Register_InterestUITests.swift in Sources */,
+				2CBF9B242420110A004A311A /* Register_InterestUserInterfaceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
